@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "479407875c975e7dbee0aefcb85e62d5",
-    "content-hash": "5c27dd23827e5c153817a7f3f5d227c6",
+    "hash": "0e9c83e45e46d2479887225308ca4cfc",
+    "content-hash": "37b2d7ef76d1e1dfbe1c9914ed232427",
     "packages": [
         {
             "name": "bower-asset/bootstrap",
@@ -369,6 +369,57 @@
                 "mailer"
             ],
             "time": "2015-06-06 14:19:39"
+        },
+        {
+            "name": "vakorovin/yii2-datetimepicker",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/vakorovin/yii2-datetimepicker.git",
+                "reference": "26a267a7cf309ca847b43d61699f353ffd093666"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/vakorovin/yii2-datetimepicker/zipball/26a267a7cf309ca847b43d61699f353ffd093666",
+                "reference": "26a267a7cf309ca847b43d61699f353ffd093666",
+                "shasum": ""
+            },
+            "require": {
+                "yiisoft/yii2": "*"
+            },
+            "type": "yii2-extension",
+            "extra": {
+                "asset-installer-paths": {
+                    "npm-asset-library": "vendor/npm",
+                    "bower-asset-library": "vendor/bower"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "vakorovin\\datetimepicker\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Vladimir Korovin",
+                    "email": "rolan1986@gmail.com"
+                }
+            ],
+            "description": "Yii2 datetimepicker",
+            "homepage": "https://github.com/vakorovin/yii2-datetimepicker",
+            "keywords": [
+                "extension",
+                "yii2",
+                "yii2 datePicker",
+                "yii2 dateTimePicker",
+                "yii2 timePicker",
+                "yii2 widget"
+            ],
+            "time": "2015-03-09 15:51:16"
         },
         {
             "name": "yiisoft/yii2",
@@ -915,7 +966,9 @@
     ],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": [],
+    "stability-flags": {
+        "vakorovin/yii2-datetimepicker": 20
+    },
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {
