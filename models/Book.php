@@ -20,6 +20,11 @@ use yii\behaviors\TimestampBehavior;
  */
 class Book extends \yii\db\ActiveRecord
 {
+    const IMAGES_DIRECTORY = 'web/uploads/';
+    const IMAGES_URL       = '@web/uploads/';
+
+    public $imageFile;
+
     /**
      * @inheritdoc
      */
@@ -46,6 +51,8 @@ class Book extends \yii\db\ActiveRecord
             [['title', 'released_at'], 'required'],
             [['released_at', 'author_id', 'created_at', 'updated_at'], 'integer'],
             [['title', 'image'], 'string', 'max' => 255],
+            [['imageFile'], 'safe'],
+            [['imageFile'], 'file', 'extensions'=>'jpg, png'],
         ];
     }
 
@@ -57,7 +64,8 @@ class Book extends \yii\db\ActiveRecord
         return [
             'id' => 'ID',
             'title' => 'Title',
-            'image' => 'Image',
+            'imageFile' => 'Preview',
+            'image' => 'Preview',
             'released_at' => 'Released At',
             'author_id' => 'Author',
             'created_at' => 'Created At',

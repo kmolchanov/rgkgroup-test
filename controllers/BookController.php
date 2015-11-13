@@ -9,6 +9,7 @@ use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
+use yii\web\UploadedFile;
 
 /**
  * BookController implements the CRUD actions for Book model.
@@ -73,7 +74,17 @@ class BookController extends Controller
     {
         $model = new Book();
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+        if ($model->load(Yii::$app->request->post()) && $model->validate()) {
+            $image = UploadedFile::getInstance($model, 'imageFile');
+            if(!empty($image)) {
+                $model->image = Yii::$app->security->generateRandomString() . '.' .$image->extension;
+                $path = Yii::$app->basePath . '/' . Book::IMAGES_DIRECTORY . $model->image;
+                $model->save();
+                $image->saveAs($path);
+            } else {
+                $model->save();
+            }
+
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
             return $this->render('create', [
@@ -92,7 +103,19 @@ class BookController extends Controller
     {
         $model = $this->findModel($id);
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+        if ($model->load(Yii::$app->request->post()) && $model->validate()) {
+            $image = UploadedFile::getInstance($model, 'imageFile');
+            if(!empty($image)) {
+                if(!empty($model->image)) {
+                    @unlink(Yii::$app->basePath . '/' . Book::IMAGES_DIRECTORY . $model->image);
+                }
+                $model->image = Yii::$app->security->generateRandomString() . '.' .$image->extension;
+                $path = Yii::$app->basePath . '/' . Book::IMAGES_DIRECTORY . $model->image;
+                $model->save();
+                $image->saveAs($path);
+            } else {
+                $model->save();
+            }
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
             return $this->render('update', [
@@ -109,7 +132,9 @@ class BookController extends Controller
      */
     public function actionDelete($id)
     {
-        $this->findModel($id)->delete();
+        $model = $this->findModel($id);
+        @unlink(Yii::$app->basePath . '/' . Book::IMAGES_DIRECTORY . $model->image);
+        $model->delete();
 
         return $this->redirect(['index']);
     }

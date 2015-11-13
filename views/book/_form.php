@@ -5,6 +5,7 @@ use yii\widgets\ActiveForm;
 use app\models\Author;
 use yii\helpers\ArrayHelper;
 use vakorovin\datetimepicker\Datetimepicker;
+use kartik\widgets\FileInput;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\Book */
@@ -13,10 +14,18 @@ use vakorovin\datetimepicker\Datetimepicker;
 
 <div class="book-form">
 
-    <?php $form = ActiveForm::begin(); ?>
+    <?php $form = ActiveForm::begin([
+        'options'=>['enctype'=>'multipart/form-data']
+    ]); ?>
 
     <?= $form->field($model, 'title')->textInput(['maxlength' => true]) ?>
 
+    <?php
+        echo $form->field($model, 'imageFile')->widget(FileInput::classname(), [
+            'options'=>['accept'=>'image/*'],
+            'pluginOptions'=>['allowedFileExtensions'=>['jpg','gif','png'],
+        ]]);
+    ?>
     <?php
     echo $form->field($model, 'released_at')->widget(DateTimePicker::classname(), [
     'options' => [
