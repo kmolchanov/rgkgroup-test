@@ -2,6 +2,7 @@
 
 use yii\helpers\Html;
 use yii\widgets\DetailView;
+use yii\timeago\TimeAgo;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\Book */

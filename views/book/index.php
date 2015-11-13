@@ -2,6 +2,7 @@
 
 use yii\helpers\Html;
 use yii\grid\GridView;
+use yii\timeago\TimeAgo;
 
 /* @var $this yii\web\View */
 /* @var $searchModel app\models\BookSearch */
@@ -28,9 +29,20 @@ $this->params['breadcrumbs'][] = $this->title;
             'id',
             'title',
             'image',
-            'released_at',
             'author.fullname',
-            // 'created_at',
+            [
+                'attribute' => 'released_at',
+                'value' => function ($model, $index, $widget) {
+                    return Yii::$app->formatter->asDatetime($model->released_at, 'd MMMM yyyy');
+                },
+            ],
+            [
+                'attribute' => 'created_at',
+                'value' => function ($model, $index, $widget) {
+                    return TimeAgo::widget(['timestamp' => $model->created_at]);
+                },
+                'format' => 'raw',
+            ],
             // 'updated_at',
 
             ['class' => 'yii\grid\ActionColumn'],
