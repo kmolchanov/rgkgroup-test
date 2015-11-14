@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "ddb89d373291e1ba802f74b64831edd0",
-    "content-hash": "37e1faef64d00c861421f5f593e88691",
+    "hash": "3a4baf234890ae8ae46b2c9a9d25d6b9",
+    "content-hash": "0e6ca8270d06af6fd83eabb433312ce9",
     "packages": [
         {
             "name": "bower-asset/bootstrap",
@@ -1559,6 +1559,56 @@
                 "yii2"
             ],
             "time": "2015-10-16 18:27:45"
+        },
+        {
+            "name": "smallbearsoft/yii2-ajax",
+            "version": "1.0.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/smallbearsoft/yii2-ajax.git",
+                "reference": "6708036e23b07c7ffbc3ffbfe112d1ae98788e26"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/smallbearsoft/yii2-ajax/zipball/6708036e23b07c7ffbc3ffbfe112d1ae98788e26",
+                "reference": "6708036e23b07c7ffbc3ffbfe112d1ae98788e26",
+                "shasum": ""
+            },
+            "require": {
+                "bower-asset/jquery": ">=1.9.1",
+                "php": ">=5.4.0",
+                "yiisoft/yii2": "*"
+            },
+            "type": "yii2-extension",
+            "extra": {
+                "asset-installer-paths": {
+                    "npm-asset-library": "vendor/npm",
+                    "bower-asset-library": "vendor/bower"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "smallbearsoft\\ajax\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Fangxin Jiang",
+                    "email": "2497085409@qq.com"
+                }
+            ],
+            "description": "This is a ajax widget of yii2 which will generate a div. The link click or form submission (for those link and form with data-ajax attribute) in this div will trigger an AJAX request.",
+            "keywords": [
+                "ajax",
+                "extension",
+                "widget",
+                "yii2-ajax"
+            ],
+            "time": "2015-10-15 01:19:58"
         },
         {
             "name": "swiftmailer/swiftmailer",

@@ -5,6 +5,11 @@ use yii\grid\GridView;
 use yii\timeago\TimeAgo;
 use yii\helpers\Url;
 use newerton\fancybox\FancyBox;
+use smallbearsoft\ajax\Ajax;
+use yii\web\JsExpression;
+use yii\bootstrap\Modal;
+use yii\widgets\Pjax;
+use yii\widgets\DetailView;
 
 /* @var $this yii\web\View */
 /* @var $searchModel app\models\BookSearch */
@@ -43,6 +48,49 @@ $this->params['breadcrumbs'][] = $this->title;
         ]
     ]);
     ?>
+
+    <?php
+        $this->registerJsFile('/js/books.js', ['depends' => [\yii\web\JqueryAsset::className()]]);
+    ?>
+    <?php Pjax::begin([
+        'enablePushState' => false,
+        'linkSelector' => '#previews a',
+    ]);?>
+
+    <?php if (!empty($bookModel)): ?>
+        <?php
+            Modal::begin([
+                'id' => 'book-preview',
+                'header' => "<h2>{$bookModel->title}</h2>",
+            ]);
+        ?>
+        <?php
+            echo DetailView::widget([
+                'model' => $bookModel,
+                'attributes' => [
+                    'id',
+                    'title',
+                    [
+                        'attribute'=>'image',
+                        'value'=>$bookModel->imageUrl,
+                        'format' => ['image', ['style' => 'max-width: 100px']],
+                    ],
+                    [
+                        'attribute' => 'released_at',
+                        'value' => Yii::$app->formatter->asDatetime($bookModel->released_at, 'd MMMM yyyy'),
+                    ],
+                    'author.fullname',
+                    'created_at:datetime',
+                    'updated_at:datetime',
+                ],
+            ]);
+        ?>
+        <script type="text/javascript">
+            showBookPreview();
+        </script>
+        <?php Modal::end(); ?>
+    <?php endif; ?>
+
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
@@ -73,8 +121,18 @@ $this->params['breadcrumbs'][] = $this->title;
                 'format' => 'raw',
             ],
 
-            ['class' => 'yii\grid\ActionColumn'],
+            [
+                'class' => 'yii\grid\ActionColumn',
+                'template' => '{update}{view}{delete}',
+                'buttons' => [
+                    'view' => function ($url, $model) {
+                        return Html::tag('span', Html::a('<span class="glyphicon glyphicon-eye-open"></span>',
+                                ['index', 'id' => $model->id]), ['id' => 'previews']);
+                    },
+                ]
+            ],
         ],
     ]); ?>
 
+    <?php Pjax::end();?>
 </div>

@@ -21,7 +21,8 @@
         "vakorovin/yii2-datetimepicker": "dev-master",
         "kartik-v/yii2-widgets": "*",
         "yiidoc/yii2-timeago": "dev-master",
-        "newerton/yii2-fancybox": "dev-master"
+        "newerton/yii2-fancybox": "dev-master",
+        "smallbearsoft/yii2-ajax": "*"
     },
     "require-dev": {
         "yiisoft/yii2-codeception": "*",

@@ -10,6 +10,8 @@ use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
 use yii\web\UploadedFile;
+use yii\bootstrap\Html;
+use yii\helpers\Url;
 
 /**
  * BookController implements the CRUD actions for Book model.
@@ -42,10 +44,20 @@ class BookController extends Controller
      * Lists all Book models.
      * @return mixed
      */
-    public function actionIndex()
+    public function actionIndex($id=null)
     {
         $searchModel = new BookSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+
+        if (!empty($id)) {
+            $model = $this->findModel($id);
+            return $this->render('index', [
+                'bookModel' => $model,
+                'imageResponse' => Html::img(Url::toRoute($model->imageUrl), ['style' => 'width:550px;']),
+                'searchModel' => $searchModel,
+                'dataProvider' => $dataProvider,
+            ]);
+        }
 
         return $this->render('index', [
             'searchModel' => $searchModel,
@@ -85,7 +97,7 @@ class BookController extends Controller
                 $model->save();
             }
 
-            return $this->redirect(['view', 'id' => $model->id]);
+            return $this->redirect(['index']);
         } else {
             return $this->render('create', [
                 'model' => $model,
@@ -116,7 +128,7 @@ class BookController extends Controller
             } else {
                 $model->save();
             }
-            return $this->redirect(['view', 'id' => $model->id]);
+            return $this->redirect(['index']);
         } else {
             return $this->render('update', [
                 'model' => $model,
