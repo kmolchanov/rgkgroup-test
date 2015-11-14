@@ -21,7 +21,7 @@ $this->params['breadcrumbs'][] = $this->title;
 <div class="book-index">
 
     <h1><?= Html::encode($this->title) ?></h1>
-    <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
+    <?php echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <p>
         <?= Html::a('Create Book', ['create'], ['class' => 'btn btn-success']) ?>
@@ -93,12 +93,12 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
-        'filterModel' => $searchModel,
+        'filterModel' => null,
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
             'id',
-
+            'title',
             [
                 'attribute' => 'image',
                 'format' => 'raw',
@@ -106,7 +106,10 @@ $this->params['breadcrumbs'][] = $this->title;
                     return Html::a(Html::img($data->imageUrl, ['width'=>'150px']), $data->imageUrl, ['class' => 'fancyboxWindow']);
                 },
             ],
-            'author.fullname',
+            [
+                'attribute' => 'author',
+                'value' => 'author.fullname',
+            ],
             [
                 'attribute' => 'released_at',
                 'value' => function ($model, $index, $widget) {
