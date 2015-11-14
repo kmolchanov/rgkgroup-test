@@ -4,6 +4,7 @@ namespace app\models;
 
 use Yii;
 use yii\behaviors\TimestampBehavior;
+use yii\helpers\Url;
 
 /**
  * This is the model class for table "{{%book}}".
@@ -79,6 +80,11 @@ class Book extends \yii\db\ActiveRecord
     public function getAuthor()
     {
         return $this->hasOne(Author::className(), ['id' => 'author_id']);
+    }
+
+    public function getImageUrl()
+    {
+        return ($this->image) ? Url::to(self::IMAGES_URL . $this->image) : false;
     }
 
     /**

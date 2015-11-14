@@ -3,6 +3,8 @@
 use yii\helpers\Html;
 use yii\grid\GridView;
 use yii\timeago\TimeAgo;
+use yii\helpers\Url;
+use newerton\fancybox\FancyBox;
 
 /* @var $this yii\web\View */
 /* @var $searchModel app\models\BookSearch */
@@ -20,6 +22,27 @@ $this->params['breadcrumbs'][] = $this->title;
         <?= Html::a('Create Book', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
 
+    <?= FancyBox::widget([
+        'target' => 'a[class=fancyboxWindow]',
+        'config' => [
+            'maxWidth' => '90%',
+            'maxHeight' => '90%',
+            'playSpeed' => 7000,
+            'padding' => 0,
+            'fitToView' => false,
+            'width' => '70%',
+            'height' => '70%',
+            'autoSize' => false,
+            'closeClick' => false,
+            'openEffect' => 'elastic',
+            'closeEffect' => 'elastic',
+            'prevEffect' => 'elastic',
+            'nextEffect' => 'elastic',
+            'closeBtn' => false,
+            'openOpacity' => true,
+        ]
+    ]);
+    ?>
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
@@ -27,8 +50,14 @@ $this->params['breadcrumbs'][] = $this->title;
             ['class' => 'yii\grid\SerialColumn'],
 
             'id',
-            'title',
-            'image',
+
+            [
+                'attribute' => 'image',
+                'format' => 'raw',
+                'value' => function($data){
+                    return Html::a(Html::img($data->imageUrl, ['width'=>'150px']), $data->imageUrl, ['class' => 'fancyboxWindow']);
+                },
+            ],
             'author.fullname',
             [
                 'attribute' => 'released_at',
@@ -43,7 +72,6 @@ $this->params['breadcrumbs'][] = $this->title;
                 },
                 'format' => 'raw',
             ],
-            // 'updated_at',
 
             ['class' => 'yii\grid\ActionColumn'],
         ],

@@ -20,7 +20,8 @@
         "yiisoft/yii2-swiftmailer": "*",
         "vakorovin/yii2-datetimepicker": "dev-master",
         "kartik-v/yii2-widgets": "*",
-        "yiidoc/yii2-timeago": "dev-master"
+        "yiidoc/yii2-timeago": "dev-master",
+        "newerton/yii2-fancybox": "dev-master"
     },
     "require-dev": {
         "yiisoft/yii2-codeception": "*",

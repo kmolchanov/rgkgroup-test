@@ -31,12 +31,16 @@ $this->params['breadcrumbs'][] = $this->title;
         'attributes' => [
             'id',
             'title',
-            'image',
+            [
+                'attribute'=>'image',
+                'value'=>$model->imageUrl,
+                'format' => ['image', ['style' => 'max-width: 100px']],
+            ],
             [
                 'attribute' => 'released_at',
-                'value' => Yii::$app->formatter->asDatetime($model->released_at, 'MM/dd/Y'),
+                'value' => Yii::$app->formatter->asDatetime($model->released_at, 'd MMMM yyyy'),
             ],
-            'author_id',
+            'author.fullname',
             'created_at:datetime',
             'updated_at:datetime',
         ],
