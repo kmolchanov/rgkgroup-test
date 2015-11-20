@@ -16,6 +16,6 @@ class m151113_154326_create_author_table extends Migration
 
     public function down()
     {
-        $this->dropTable('author');
+        $this->dropTable('{{%author}}');
     }
 }
