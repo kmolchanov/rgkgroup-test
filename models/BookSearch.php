@@ -71,6 +71,7 @@ class BookSearch extends Book
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
         ]);
+
         $from_date = !empty($this->released_from) ? strtotime($this->released_from) : $this->released_from;
         $to_date = !empty($this->released_to) ? strtotime($this->released_to) : $this->released_to;
 

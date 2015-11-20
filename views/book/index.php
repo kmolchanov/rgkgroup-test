@@ -105,6 +105,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 'value' => function($data){
                     return Html::a(Html::img($data->imageUrl, ['width'=>'150px']), $data->imageUrl, ['class' => 'fancyboxWindow']);
                 },
+                'enableSorting' => false,
             ],
             [
                 'attribute' => 'author',
@@ -131,6 +132,10 @@ $this->params['breadcrumbs'][] = $this->title;
                     'view' => function ($url, $model) {
                         return Html::tag('span', Html::a('<span class="glyphicon glyphicon-eye-open"></span>',
                                 ['index', 'id' => $model->id]), ['id' => 'previews']);
+                    },
+                    'update' => function ($url, $model) {
+                        return Html::tag('span', Html::a('<span class="glyphicon glyphicon-pencil"></span>',
+                                ['update', 'id' => $model->id], ['target' => '_blank']));
                     },
                 ]
             ],

@@ -46,6 +46,8 @@ class BookController extends Controller
      */
     public function actionIndex($id=null)
     {
+        Yii::$app->session->setFlash('redirectUrl', Yii::$app->request->url);
+
         $searchModel = new BookSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
@@ -128,7 +130,7 @@ class BookController extends Controller
             } else {
                 $model->save();
             }
-            return $this->redirect(['index']);
+            return $this->redirect(Yii::$app->session->hasFlash('redirectUrl') ? Yii::$app->session->getFlash('redirectUrl') : ['index']);
         } else {
             return $this->render('update', [
                 'model' => $model,
